@@ -32,9 +32,11 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "file": "^0.2.2",
     "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "loader": "^2.1.1",
     "lodash": "^4.17.21",
     "url-loader": "^4.1.1"
   }
