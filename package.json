@@ -28,6 +28,9 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "file-loader": "^6.2.0",
+    "font-awesome-sass-loader": "^2.0.1",
+    "lodash": "^4.17.21",
+    "url-loader": "^4.1.1"
   }
 }

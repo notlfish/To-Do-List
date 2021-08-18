@@ -1,3 +1,32 @@
 body {
-    background-color: bisque;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#to-do-list {
+  list-style: none;
+  width: 400px;
+}
+
+.to-do-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-description {
+  align-self: flex-start;
+  display: inline-block;
+  margin-left: 10px;
 }
