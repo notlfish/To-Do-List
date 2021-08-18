@@ -37,5 +37,7 @@ export default class Task {
     return { html: taskContainer, button: taskCompleteButton, drag: taskDrag };
   }
 
-
+  toggleCompleted() {
+    this.completed = !this.completed;
+  }
 }
