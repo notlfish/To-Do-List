@@ -20,7 +20,12 @@ export default class ToDoList {
       .forEach((task) => {
         console.log(task);
         const { html, button } = task.render();
-
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          task.toggleCompleted();
+          this.save();
+          this.render(container);
+        });
         container.appendChild(html);
       });
   };
