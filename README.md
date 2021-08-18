@@ -9,7 +9,7 @@ Minimalist To Do list to organize your day within your web browser
 - JavaScript
 
 ## Getting Started
-
+**You'll need to have git and npm installed in you environment to follow these instructions.**
 To get a local copy of the repository please run the following commands on your terminal:
 
 ```bash
@@ -18,13 +18,18 @@ $ git clone https://github.com/notlfish/To-Do-List.git
 $ cd To-Do-List
 ```
 
-In order to run the project, you need to have a local server running. A way to do this is
-by using vscode with the live server extension installed, then run
-
+To be able to run the project, you'll need to have webpack installed
 ```bash
-$ code .
+$ npm install webpack webpack-cli --save-dev
 ```
-From vscode open index.html, run the live server, and open `http://127.0.0.1:5500/index.html` from a web browser.
+
+With this, you can use
+```bash
+$ npm run build
+$ npm start
+```
+To build the project and to start a server, respectively. `npm start` should open the page in a browser by itself, if it
+doesn't, you can just access `localhost:8080` to see the project.
 
 ## Author
 
