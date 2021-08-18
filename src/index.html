@@ -6,7 +6,21 @@
     <title>To Do List</title>
 </head>
 <body>
-    <ul id="to-do-list">
-    </ul>
+    <div id="to-do-app">
+        <div class="app-entry">
+            <p>Today's Tasks</p>
+            <span class="gray-icon">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+            </span>
+        </div>
+        <form id="new-task" class="app-entry">
+            <input id="new-item" type="text" placeholder="Add to your list...">
+            <button id="submit-new-task" type="submit" class="gray-icon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </form>
+        <ul id="to-do-list">
+        </ul>
+    </div>
 </body>
 </html>

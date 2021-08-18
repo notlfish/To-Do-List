@@ -11,6 +11,7 @@ class Task {
   render() {
     let taskContainer = document.createElement('li');
     taskContainer.classList.add('to-do-task');
+    taskContainer.classList.add('app-entry');
 
     let taskLeft = document.createElement('div');
     const taskCompleteButton = document.createElement('button');
@@ -28,10 +29,9 @@ class Task {
         '<i class="fa fa-square-o" aria-hidden="true"></i>';
     }
 
-
     const taskDrag = document.createElement('p');
     taskDrag.innerHTML = '<i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
-    taskDrag.classList.add('task-drag');
+    taskDrag.classList.add('gray-icon');
 
     taskLeft.appendChild(taskCompleteButton);
     taskLeft.appendChild(taskDescription);
