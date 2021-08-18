@@ -4,7 +4,7 @@ export default class ToDoList {
   constructor(tasks = []) {
     const lsList = JSON.parse(localStorage.getItem('ToDoList'));
     if (lsList) {
-      this.list = lsList.map(task => new Task(task.description, task.index, task.completed));
+      this.list = lsList.map((task) => new Task(task.description, task.index, task.completed));
     } else {
       this.list = tasks;
     }
@@ -18,7 +18,6 @@ export default class ToDoList {
     container.innerHTML = '';
     this.list.sort((task1, task2) => task1.index - task2.index)
       .forEach((task) => {
-        console.log(task);
         const { html, button } = task.render();
         button.addEventListener('click', (event) => {
           event.preventDefault();
@@ -28,5 +27,5 @@ export default class ToDoList {
         });
         container.appendChild(html);
       });
-  };
+  }
 }
