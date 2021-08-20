@@ -85,8 +85,8 @@ button:hover {
   text-decoration: underline;
 }
 
-#new-item,
-#new-item:focus {
+input[type=text],
+input[type=text]:focus {
   border: none;
   outline: none;
   font-family: inherit;
