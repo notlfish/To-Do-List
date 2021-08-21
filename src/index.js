@@ -1,11 +1,12 @@
 import './style.css';
 import 'font-awesome/css/font-awesome.css';
 import ToDoList from './toDoList';
-import { addTaskListener, clearCompletedListener } from './crud';
+import { addTaskListener, clearCompletedListener, saveList } from './crud';
 
 const toDoUl = document.getElementById('to-do-list');
 
 const toDoList = new ToDoList();
+saveList(toDoList);
 
 const newTaskForm = document.getElementById('new-task');
 newTaskForm.addEventListener('submit', addTaskListener(toDoList, toDoUl));
