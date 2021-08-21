@@ -69,7 +69,7 @@ button:hover {
   color: black;
 }
 
-.clear-completed {
+#clear-completed {
   display: block;
   margin: auto;
   height: 55px;

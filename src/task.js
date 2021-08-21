@@ -1,3 +1,9 @@
+import {
+  completeTaskListener,
+  descriptionListener,
+  taskUpdateListener,
+} from './crud';
+
 export default class Task {
   constructor(description, index, completed = false) {
     this.description = description;
@@ -13,6 +19,9 @@ export default class Task {
     } else {
       completeButton.innerHTML = '<i class="fa fa-square-o" aria-hidden="true"></i>';
     }
+
+    completeButton.addEventListener('click', completeTaskListener(this));
+
     return completeButton;
   }
 
@@ -22,20 +31,25 @@ export default class Task {
     descriptionP.innerHTML = this.description;
     if (this.completed) descriptionP.classList.add('completed-task');
 
+    descriptionP.addEventListener('click', descriptionListener(this));
+
     return descriptionP;
   }
 
   renderDescriptionInput() {
+    const form = document.createElement('form');
+    form.classList.add('task-description');
     const descriptionInput = document.createElement('input');
-    descriptionInput.classList.add('task-description');
     descriptionInput.type = 'text';
     descriptionInput.placeholder = this.description;
+    form.appendChild(descriptionInput);
+    form.addEventListener('submit', taskUpdateListener(this));
 
-    return descriptionInput;
+    return form;
   }
 
-  render(withInput) {
-    const container = document.createElement('li');
+  render(container, withInput = false) {
+    container.innerHTML = '';
     container.classList.add('to-do-task');
     container.classList.add('app-entry');
     const containerLeft = document.createElement('div');
@@ -43,19 +57,13 @@ export default class Task {
     const button = this.renderCompleteButton();
     const description = withInput ? this.renderDescriptionInput()
       : this.renderDescriptionP();
+    containerLeft.append(button, description);
+
     const drag = document.createElement('p');
     drag.innerHTML = '<i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
     drag.classList.add('gray-icon');
-
-    containerLeft.append(button, description);
     container.append(containerLeft, drag);
-
-    return {
-      html: container,
-      button,
-      description,
-      drag,
-    };
+    return description;
   }
 
   toggleCompleted() {
