@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "gh-pages": "^3.2.3",
     "loader": "^2.1.1",
     "lodash": "^4.17.21",
     "url-loader": "^4.1.1"
