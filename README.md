@@ -2,6 +2,8 @@
 
 Minimalist To Do list to organize your day within your web browser
 
+#### [Live version](https://notlfish.github.io/To-Do-List/).
+
 ## Built With
 
 - HTML
@@ -18,9 +20,9 @@ $ git clone https://github.com/notlfish/To-Do-List.git
 $ cd To-Do-List
 ```
 
-To be able to run the project, you'll need to have webpack installed
+To be able to serve the project on your computer, you'll need to install the developer's dependencies.
 ```bash
-$ npm install webpack webpack-cli --save-dev
+$ npm install && npm install --dev
 ```
 
 With this, you can use
