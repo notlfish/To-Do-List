@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/652f8ed312.js" crossorigin="anonymous"></script>
+    <title>To Do List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div id="to-do-app">
+        <div class="app-entry">
+            <p>Today's Tasks</p>
+            <span class="gray-icon">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+            </span>
+        </div>
+        <form id="new-task" class="app-entry">
+            <input id="new-item" type="text" placeholder="Add to your list...">
+            <button id="submit-new-task" type="submit" class="gray-icon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </form>
+        <ul id="to-do-list">
+        </ul>
+        <button class="clear-completed">Clear all completed</button>
+    </div>
+</body>
+</html>
