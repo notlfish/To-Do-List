@@ -1,3 +1,9 @@
+import {
+  completeTaskListener,
+  descriptionListener,
+  taskUpdateListener,
+} from './crud';
+
 export default class Task {
   constructor(description, index, completed = false) {
     this.description = description;
@@ -5,39 +11,66 @@ export default class Task {
     this.completed = completed;
   }
 
-  render() {
-    const taskContainer = document.createElement('li');
-    taskContainer.classList.add('to-do-task');
-    taskContainer.classList.add('app-entry');
-
-    const taskLeft = document.createElement('div');
-    const taskCompleteButton = document.createElement('button');
-
-    const taskDescription = document.createElement('p');
-    taskDescription.classList.add('task-description');
-    taskDescription.innerHTML = this.description;
-
+  renderCompleteButton() {
+    const completeButton = document.createElement('button');
     if (this.completed) {
-      taskCompleteButton.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
-      taskDescription.classList.add('completed-task');
-      taskCompleteButton.classList.add('checked-task');
+      completeButton.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+      completeButton.classList.add('checked-task');
     } else {
-      taskCompleteButton.innerHTML = '<i class="fa fa-square-o" aria-hidden="true"></i>';
+      completeButton.innerHTML = '<i class="fa fa-square-o" aria-hidden="true"></i>';
     }
 
-    const taskDrag = document.createElement('p');
-    taskDrag.innerHTML = '<i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
-    taskDrag.classList.add('gray-icon');
+    completeButton.addEventListener('click', completeTaskListener(this));
 
-    taskLeft.appendChild(taskCompleteButton);
-    taskLeft.appendChild(taskDescription);
-    taskContainer.appendChild(taskLeft);
-    taskContainer.appendChild(taskDrag);
+    return completeButton;
+  }
 
-    return { html: taskContainer, button: taskCompleteButton, drag: taskDrag };
+  renderDescriptionP() {
+    const descriptionP = document.createElement('p');
+    descriptionP.classList.add('task-description');
+    descriptionP.innerHTML = this.description;
+    if (this.completed) descriptionP.classList.add('completed-task');
+
+    descriptionP.addEventListener('click', descriptionListener(this));
+
+    return descriptionP;
+  }
+
+  renderDescriptionInput() {
+    const form = document.createElement('form');
+    form.classList.add('task-description');
+    const descriptionInput = document.createElement('input');
+    descriptionInput.type = 'text';
+    descriptionInput.placeholder = this.description;
+    form.appendChild(descriptionInput);
+    form.addEventListener('submit', taskUpdateListener(this));
+
+    return form;
+  }
+
+  render(container, withInput = false) {
+    container.innerHTML = '';
+    container.classList.add('to-do-task');
+    container.classList.add('app-entry');
+    const containerLeft = document.createElement('div');
+
+    const button = this.renderCompleteButton();
+    const description = withInput ? this.renderDescriptionInput()
+      : this.renderDescriptionP();
+    containerLeft.append(button, description);
+
+    const drag = document.createElement('p');
+    drag.innerHTML = '<i class="fa fa-ellipsis-v" aria-hidden="true"></i>';
+    drag.classList.add('gray-icon');
+    container.append(containerLeft, drag);
+    return description;
   }
 
   toggleCompleted() {
     this.completed = !this.completed;
+  }
+
+  updateDesctiption(newDescription) {
+    this.description = newDescription;
   }
 }
