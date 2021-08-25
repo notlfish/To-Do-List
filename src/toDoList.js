@@ -1,8 +1,10 @@
 import Task from './task';
 
+export const LIST_STORAGE_KEY = 'ToDoList';
+
 export default class ToDoList {
   constructor() {
-    const lsList = JSON.parse(localStorage.getItem('ToDoList'));
+    const lsList = JSON.parse(localStorage.getItem(LIST_STORAGE_KEY));
     if (lsList) {
       this.list = lsList.map((task) => new Task(task.description, task.index, task.completed));
     } else {
@@ -11,7 +13,7 @@ export default class ToDoList {
   }
 
   save() {
-    localStorage.setItem('ToDoList', JSON.stringify(this.list));
+    localStorage.setItem(LIST_STORAGE_KEY, JSON.stringify(this.list));
   }
 
   render(container) {

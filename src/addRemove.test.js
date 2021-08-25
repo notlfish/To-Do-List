@@ -1,5 +1,5 @@
-import { addTaskListener, clearCompletedListener } from './crud';
-import ToDoList from './toDoList';
+import { saveList, addTaskListener, clearCompletedListener } from './crud';
+import ToDoList, { LIST_STORAGE_KEY } from './toDoList';
 
 class LocalStorageMock {
   constructor() {
@@ -15,7 +15,7 @@ class LocalStorageMock {
   }
 
   setItem(key, value) {
-    this.store[key] = String(value);
+    this.store[key] = value;
   }
 
   removeItem(key) {
@@ -28,6 +28,11 @@ global.localStorage = new LocalStorageMock();
 describe('Add Task', () => {
   let emptyList = new ToDoList();
   let tasksList = new ToDoList();
+  let eventMock = {
+    preventDefault: () => {},
+    target: {
+      getElementsByTagName: () => [{ value: 'Mock description'}],
+    }};
 
   beforeEach(() => {
     emptyList = new ToDoList();
@@ -35,19 +40,47 @@ describe('Add Task', () => {
     tasksList.addTask('First Task');
     tasksList.addTask('Second Task');
     tasksList.addTask('Third Task');
+
   });
 
-  describe('ToDoList#addTask', () => {
-    test('Adds a task to an empty list', () => {
-      emptyList.addTask('First Task')
-      expect(emptyList.list.length).toBe(1);
-      expect(emptyList.list[0].description).toEqual("First Task");
+  describe('Add elements functionality', () => {
+    describe('ToDoList#addTask', () => {
+      test('Adds a task to an empty list; check description', () => {
+        emptyList.addTask('First Task')
+        expect(emptyList.list.length).toBe(1);
+        expect(emptyList.list[0].description).toEqual("First Task");
+      });
+
+      test('Adds a task to a nonempty list; check description and index', () => {
+        tasksList.addTask('Fourth Task')
+        expect(tasksList.list[3].description).toEqual("Fourth Task");
+        expect(tasksList.list[3].index).toEqual(3);
+      });
     });
 
-    test('Adds a task to a nonempty list', () => {
-      tasksList.addTask('Fourth Task')
-      expect(tasksList.list[3].description).toEqual("Fourth Task");
-      expect(tasksList.list[3].index).toEqual(3);
+    describe('crud.js addTaskListener()', () => {
+      const container = document.createElement('ul');
+
+      beforeEach(() => {
+        container.innerHTML = '';
+        saveList(tasksList);
+      });
+
+      test('Adds task to the list object', () => {
+        addTaskListener(emptyList, container)(eventMock);
+        expect(emptyList.list.length).toBe(1);
+      });
+
+      test('Renders list object', () => {
+        addTaskListener(tasksList, container)(eventMock);
+        expect(container.innerHTML).toContain("Mock description");
+      });
+
+      test('Saves list', () => {
+        addTaskListener(tasksList, container)(eventMock);
+        const fetchedList = localStorage.getItem(LIST_STORAGE_KEY);
+        expect(fetchedList).toEqual(JSON.stringify(tasksList.list));
+      });
     });
   });
 });
