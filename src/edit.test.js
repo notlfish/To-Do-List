@@ -83,3 +83,28 @@ describe('Edit task description', () => {
     expect(li.innerHTML).not.toContain('<form');
   });
 });
+
+describe('Drag & drop functionality', () => {
+  let tasksList = new ToDoList();
+
+  beforeEach(() => {
+    localStorage.clear();
+    tasksList = new ToDoList();
+    tasksList.addTask('Zeroth Task');
+    tasksList.addTask('First Task');
+    tasksList.addTask('Second Task');
+    tasksList.addTask('Third Task');
+  });
+
+  test('ToDoList#taskReorder updates bigger indices', () => {
+    tasksList.taskReorder(3, 0);
+
+    const indices = tasksList.list.map((task) => task.index);
+    const descriptions = tasksList.list.map((task) => task.description)
+      .join(', ');
+    const expectedDescriptions = 'Third Task, Zeroth Task, First Task, Second Task';
+
+    expect(indices).toEqual([0, 1, 2, 3]);
+    expect(descriptions).toEqual(expectedDescriptions);
+  });
+});
