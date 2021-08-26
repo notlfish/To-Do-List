@@ -1,9 +1,6 @@
 import { saveList, addTaskListener, clearCompletedListener } from './crud';
 import ToDoList, { LIST_STORAGE_KEY } from './toDoList';
-import {eventMock} from './mock.js'
-
-
-
+import eventMock from './mock';
 
 describe('Add Task', () => {
   let emptyList = new ToDoList();

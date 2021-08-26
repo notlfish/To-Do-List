@@ -1,9 +1,9 @@
-export const eventMock = {
+const eventMock = {
   container: document.createElement('li'),
   preventDefault: () => {},
   target: {
     getElementsByTagName: () => [{ value: 'Mock description' }],
-    closest:  () => eventMock.container
+    closest: () => eventMock.container,
   },
 };
 
@@ -30,3 +30,5 @@ class LocalStorageMock {
 }
 
 global.localStorage = new LocalStorageMock();
+
+export default eventMock;
