@@ -1,7 +1,9 @@
 export const eventMock = {
+  container: document.createElement('li'),
   preventDefault: () => {},
   target: {
     getElementsByTagName: () => [{ value: 'Mock description' }],
+    closest:  () => eventMock.container
   },
 };
 
