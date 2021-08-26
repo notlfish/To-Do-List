@@ -38,4 +38,15 @@ export default class ToDoList {
       task.index = index;
     });
   }
+
+  taskReorder(oldIndex, newIndex) {
+    this.list.forEach((task) => {
+      if (task.index === oldIndex) {
+        task.index = newIndex;
+      } else if (task.index >= newIndex) {
+        task.index += 1;
+      }
+    });
+    this.list = this.list.sort((task1, task2) => task1.index - task2.index);
+  }
 }
